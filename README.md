@@ -1,4 +1,6 @@
 
+https://github.com/llvm/llvm-project/issues/139189
+
 Tiny project to demostrate the clangd 21 transitive import bug. Some modules carry around implicit module dependencies, apparently they are not implicitly imported by the consumer.
 
 The bug is reliably reproducible using with following version (installed from LLVM's apt repository):
