@@ -1,14 +1,30 @@
 
-/// Occasionally the same bug can be observed in `main.cpp`.
+#include <utility>
+#include <proxy/proxy_macros.h>
 
-// import unique_wrapper;
-// import unique_fd;
-import my_app;
+/// `proxy` is exported from `proxy.ixx`
+/// Error: Module 'proxy' not found
+/// `E[07:05:17.608] Failed to build module proxy; due to Failed to build compiler invocation`
+import proxy;
+
+/// `proxy_` is exported from `proxy.cpp`
+// import proxy_;
+
+extern "C++" {
+namespace mem {
+PRO_DEF_MEM_DISPATCH(foo, foo);
+}
+}
+
+struct Foo 
+    : pro::facade_builder
+    ::add_convention<mem::foo, int() const>
+    ::build {};
+
+auto f1(pro::proxy<Foo> p) {
+    p->; // <- trigger auto completion here, `foo` should show up.
+}
 
 int main() {
-  MyApp app{123};
-  app.print_the_fd(); // Try to trigger auto completion here while "Module
-                      // 'my_app' not found" error is present. `print_the_fd`
-                      // won't be available.
-  return 0;
+
 }
