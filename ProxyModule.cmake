@@ -1,6 +1,4 @@
-# find_package(proxy REQUIRED)
-
-if(NOT DEFINED proxy_INCLUDE_DIR) # (1)
+if(NOT DEFINED proxy_INCLUDE_DIR)
   if(NOT DEFINED proxy_SOURCE_DIR)
     message(FATAL_ERROR "proxy_INCLUDE_DIR or proxy_SOURCE_DIR must be defined to use this script.")
   endif()
@@ -24,5 +22,5 @@ target_sources(msft_proxy_module PUBLIC
   FILES
     ${proxy_INCLUDE_DIR}/proxy/proxy.ixx
 )
-target_compile_features(msft_proxy_module PUBLIC cxx_std_20) # (2)
+target_compile_features(msft_proxy_module PUBLIC cxx_std_26)
 target_link_libraries(msft_proxy_module PUBLIC msft_proxy)
